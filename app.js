@@ -1,12 +1,12 @@
-const Usuario = require("./usuarios");
-const user = new Usuario("Heitor", "Heitor@gmail.com")
+const Cliente = require("./cliente");
+const user = new Cliente("Heitor", "Heitor@gmail.com", "123")
 
-excluirUsuario(user);
+excluirCliente(user);
 
-async function inserirUsuario(user) {
+async function inserirCliente(user) {
  await user.inserir();
 }
 
-async function excluirUsuario(user) {
+async function excluirCliente(user) {
  await user.excluir();
 }
