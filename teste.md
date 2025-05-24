@@ -1,3 +1,6 @@
+# Exemplos de Consultas MongoDB
+
+- Exemplos práticos de como realizar operações de busca no banco de dados do TremBom utilizando a shell do MongoDB. Essas consultas ilustram como interagir com as coleções de clientes, restaurantes, pedidos e pagamentos para recuperar informações cruciais para o funcionamento da plataforma.
 ```sh
 // Busca cliente pelo email
 db.cliente.findOne({ email: "heitor@gmail" })
