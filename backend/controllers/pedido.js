@@ -12,11 +12,6 @@ class Pedido {
     this.restaurante_id = restaurante_id
   }
 
-  constructor(id_pedido) {
-
-    this._id = id_pedido;
-
-  }
 
   async inserir() {
     try {
@@ -38,11 +33,11 @@ class Pedido {
     }
   }
 
-    async excluir(client_id) {
+  async excluir(client_id) {
     try {
 
       const { db, client } = await connect();
-      const result = await db.collection("pedido").deleteMany({ client_id:  client_id});
+      const result = await db.collection("pedido").deleteMany({ client_id: client_id });
 
       console.log("Pedido excluido:", result.deletedCount);
 

@@ -50,6 +50,7 @@ const server = http.createServer(async (req, res) => {
       const cliente = await Cliente.consultar(filtro);
 
       const pedido = new Pedido(10, 40, `${cliente._id}`, 'restId') // ->> Cria pedido
+
       pedido.inserir()
 
       console.log(`Cliente encontrado! ID: ${cliente._id}`);
@@ -92,22 +93,42 @@ const server = http.createServer(async (req, res) => {
 
       res.end('Restaurante atualizado com sucesso!');
 
-    } else if (req.method === 'POST' && req.url === '/adicionar-pedido') {
+    } else if (req.method === 'POST' && req.url === '/inserir-pedido') {
 
-      const pedido = new Pedido(1, 30, 'id1', 'id2')
+      const filtro = { nome: "Heitor" };
+
+      const cliente = await Cliente.consultar(filtro);
+
+      const pedido = new Pedido(10, 40, `${cliente._id}`, 'restId') // ->> Cria pedido
+
+      pedido.inserir()
+
+      console.log(`Cliente encontrado! ID: ${cliente._id}`);
+
+      res.end(`Cliente encontrado! ID: ${cliente._id}`)
 
     } else if (req.method === 'DELETE' && req.url === '/excluir-pedido') {
 
-      const pedido = new Pedido('6831027db8f4b7256a3f7712')
+      const filtro = { nome: "Heitor" };
+
+      const cliente = await Cliente.consultar(filtro);
+
+      console.log(`Cliente encontrado! ID: ${cliente._id}`);
+
+      const pedido = new Pedido(null, null, `${cliente._id}`, null) // ->> Cria pedido
 
       pedido.excluir()
 
-    } 
+      console.log(`Pedido ! ID: ${cliente._id}`);
+
+      res.end(`Cliente encontrado! ID: ${cliente._id}`)
+
+    }
     else {
 
       res.end('Rota não encontrada');
 
-    } 
+    }
   }
   catch (error) {
     console.error('Erro ao processar a requisição:', error);
