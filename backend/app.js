@@ -1,6 +1,7 @@
 const http = require('http');
 const Cliente = require("./controllers/cliente");
 const Restaurante = require("./controllers/restaurante");
+const Pedido = require('./controllers/pedido')
 
 
 const server = http.createServer(async (req, res) => {
@@ -48,6 +49,9 @@ const server = http.createServer(async (req, res) => {
 
       const cliente = await Cliente.consultar(filtro);
 
+      const pedido = new Pedido(10, 40, `${cliente._id}`, 'restId') // ->> Cria pedido
+      pedido.inserir()
+
       console.log(`Cliente encontrado! ID: ${cliente._id}`);
 
       res.end(`Cliente encontrado! ID: ${cliente._id}`)
@@ -90,13 +94,20 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'POST' && req.url === '/adicionar-pedido') {
 
-      const pedido = new Pedido(1, 30,)
+      const pedido = new Pedido(1, 30, 'id1', 'id2')
 
-    } else {
+    } else if (req.method === 'DELETE' && req.url === '/excluir-pedido') {
+
+      const pedido = new Pedido('6831027db8f4b7256a3f7712')
+
+      pedido.excluir()
+
+    } 
+    else {
 
       res.end('Rota não encontrada');
 
-    }
+    } 
   }
   catch (error) {
     console.error('Erro ao processar a requisição:', error);

@@ -9,6 +9,7 @@ class Restaurante {
     this.horario_fechamento = horario_fechamento
 
   }
+  
   async inserir() {
     try {
 
