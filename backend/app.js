@@ -46,9 +46,11 @@ const server = http.createServer(async (req, res) => {
 
       const filtro = { nome: "Heitor" };
 
-      await Cliente.consultar(filtro);
+      const cliente = await Cliente.consultar(filtro);
 
-      res.end('Cliente atualizado com sucesso!');
+      console.log(`Cliente encontrado! ID: ${cliente._id}`);
+
+      res.end(`Cliente encontrado! ID: ${cliente._id}`)
 
     } else if (req.method === 'POST' && req.url === '/inserir-restaurante') {
 
@@ -85,6 +87,10 @@ const server = http.createServer(async (req, res) => {
       await Restaurante.consultar(filtro);
 
       res.end('Restaurante atualizado com sucesso!');
+
+    } else if (req.method === 'POST' && req.url === '/adicionar-pedido') {
+
+      const pedido = new Pedido(1, 30,)
 
     } else {
 

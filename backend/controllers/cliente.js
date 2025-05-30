@@ -80,11 +80,12 @@ class Cliente {
 
       const cliente = await
 
-        db.collection("cliente").find(filtro).toArray();
+        db.collection("cliente").findOne(filtro);
 
-      console.log("Usuários encontrados:", cliente);
 
       client.close();
+
+      return cliente;
 
     } catch (error) {
 
