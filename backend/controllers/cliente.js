@@ -6,6 +6,7 @@ class Cliente {
     this.email = email
     this.senha = senha
   }
+
   async inserir() {
     try {
       const { db, client } = await connect();
@@ -25,12 +26,11 @@ class Cliente {
     }
   }
 
-  async excluir() {
-
+  static async excluir(_id) {
     try {
       const { db, client } = await connect();
 
-      const result = await db.collection("cliente").deleteOne({ _id: this._id });
+      const result = await db.collection("cliente").deleteOne({ _id: _id });
 
       console.log("Cliente Excluido:", result.deletedCount);
       client.close();
@@ -41,12 +41,11 @@ class Cliente {
   }
 
   static async atualizar(filtro, novosDados) {
-
     try {
       const { db, client } = await connect();
 
       const result = await
-        db.collection("cliente").updateMany(filtro, {
+        db.collection("cliente").updateOne(filtro, {
           $set: novosDados,
         });
 
@@ -55,31 +54,21 @@ class Cliente {
 
     } catch (error) {
 
-      Logger.log("Erro ao atualizar cliente: " + error);
+      console.log("Erro ao atualizar cliente: " + error);
 
     }
 
   }
 
   static async consultar(filtro = {}) {
-
     try {
-
       const { db, client } = await connect();
-
       const cliente = await
-
         db.collection("cliente").findOne(filtro);
-
-
       client.close();
-
       return cliente;
-
     } catch (error) {
-
-      Logger.log("Erro ao buscar cliente: " + error);
-
+      console.log.log("Erro ao buscar cliente: " + error);
     }
 
   }

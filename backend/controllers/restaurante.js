@@ -20,31 +20,21 @@ class Restaurante {
 
       this._id = result.insertedId
       console.log("Restaurante inserido:", result.insertedId);
-
       client.close();
-
     } catch (error) {
-
       console.log("Erro ao inserir restaurante:", errorestaurante_nomer);
-
     }
   }
 
-  async excluir() {
+  static async excluir(nome) {
     try {
 
       const { db, client } = await connect();
-
-      const result = await db.collection("restaurante").deleteOne({ nome: this.nome });
-
+      const result = await db.collection("restaurante").deleteOne({ restaurante_nome: nome });
       console.log("Restaurante Excluido:", result.deletedCount);
-
       client.close();
-
     } catch (error) {
-
       console.log("Erro ao excluir restaurante:", error);
-
     }
   }
 
@@ -57,14 +47,11 @@ class Restaurante {
         db.collection("restaurante").updateMany(filtro, {
           $set: novosDados,
         });
-
       console.log("Restaurante atualizados:", result.modifiedCount);
       client.close();
 
     } catch (error) {
-
-      Logger.log("Erro ao atualizar usuários: " + error);
-
+      console.log("Erro ao atualizar restaurante: " + error);
     }
 
   }
