@@ -1,13 +1,10 @@
 const { connect } = require("../db");
 class Restaurante {
-  constructor(restaurante_nome, horario_abertura, horario_fechamento) {
-
+  constructor(restaurante_nome, horario_abertura, horario_fechamento, _id = null) {
+    this._id = _id
     this.restaurante_nome = restaurante_nome
-
     this.horario_abertura = horario_abertura
-
     this.horario_fechamento = horario_fechamento
-
   }
   
   async inserir() {
@@ -21,6 +18,7 @@ class Restaurante {
         horario_fechamento: this.horario_fechamento
       });
 
+      this._id = result.insertedId
       console.log("Restaurante inserido:", result.insertedId);
 
       client.close();

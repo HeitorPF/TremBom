@@ -25,9 +25,9 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'DELETE' && req.url === '/excluir-cliente') {
 
-      const nomeCliente = "Heitor";
+      const filtro = { email: "heitor@gmail", senha:"123" };
 
-      const cliente = new Cliente(nomeCliente);
+      const cliente = await Cliente.consultar(filtro);
 
       await cliente.excluir();
 
