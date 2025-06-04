@@ -37,7 +37,6 @@ class Cliente {
     } catch (error) {
       console.log("Erro ao excluir usuário:", error);
     }
-
   }
 
   static async atualizar(filtro, novosDados) {

@@ -63,16 +63,13 @@ class Restaurante {
       const { db, client } = await connect();
 
       const restaurante = await
-
-        db.collection("restaurante").find(filtro).toArray();
-
-      console.log("Restaurante encontrados:", restaurante);
-
+        db.collection("restaurante").findOne(filtro)
       client.close();
+      return restaurante
 
     } catch (error) {
 
-      Logger.log("Erro ao buscar restaurante: " + error);
+      console.log("Erro ao buscar restaurante: " + error);
 
     }
 

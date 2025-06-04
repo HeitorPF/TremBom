@@ -14,6 +14,7 @@ const server = http.createServer(async (req, res) => {
   const email = "joao@gmail"
   const senha = "123"
 
+  const restaurante_nome = "piriri"
 
   try {
     // --------------------- CLIENTE ----------------------
@@ -74,39 +75,35 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'GET' && req.url === '/consultar-restaurante') { // CONSULTAR RESTAURANTE !!
 
-      const filtro = { nome: "Estação" };
+      const filtro = { restaurante_nome: "piriri" };
 
-      await Restaurante.consultar(filtro);
+      const rest = await Restaurante.consultar(filtro);
+      console.log(rest)
 
       res.end('Restaurante atualizado com sucesso!');
 
+      // --------------------- PEDIDO ----------------------
     } else if (req.method === 'POST' && req.url === '/inserir-pedido') {
 
-      const filtro = { nome: "Heitor" };
+      const filtroCliente = { email: email, senha: senha };
+      const cliente = await Cliente.consultar(filtroCliente);
 
-      const cliente = await Cliente.consultar(filtro);
+      const filtroRest = { restaurante_nome: restaurante_nome}
+      const restaurante = await Restaurante.consultar(filtroRest)
 
-      const pedido = new Pedido(10, 40, `${cliente._id}`, 'restId') // ->> Cria pedido
-
+      const pedido = new Pedido(40, 80, cliente._id, restaurante._id) // ->> Cria pedido
       pedido.inserir()
-
-      console.log(`Cliente encontrado! ID: ${cliente._id}`);
-
-      res.end(`Cliente encontrado! ID: ${cliente._id}`)
+      res.end(`Pedido feito!`)
 
     } else if (req.method === 'DELETE' && req.url === '/excluir-pedido') {
+      
+      const filtroCliente = { email: email, senha: senha };
+      const cliente = await Cliente.consultar(filtroCliente);
+      console.log(cliente)
 
-      const filtro = { nome: "Heitor" };
+      Pedido.excluir(cliente._id)
 
-      const cliente = await Cliente.consultar(filtro);
-
-      console.log(`Cliente encontrado! ID: ${cliente._id}`);
-
-      const pedido = new Pedido(null, null, `${cliente._id}`, null) // ->> Cria pedido
-
-      pedido.excluir()
-
-      console.log(`Pedido ! ID: ${cliente._id}`);
+      console.log('Pedidos excluidos');
 
       res.end(`Cliente encontrado! ID: ${cliente._id}`)
 
