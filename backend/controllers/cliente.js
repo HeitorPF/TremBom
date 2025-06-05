@@ -17,7 +17,7 @@ class Cliente {
         senha: this.senha
       });
       this._id = result.insertedId
-      
+
       console.log("Cliente inserido:", result.insertedId);
       client.close();
 
@@ -67,7 +67,7 @@ class Cliente {
       client.close();
       return cliente;
     } catch (error) {
-      console.log.log("Erro ao buscar cliente: " + error);
+      console.log("Erro ao buscar cliente: " + error);
     }
 
   }

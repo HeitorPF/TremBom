@@ -42,6 +42,20 @@ class Pedido {
     }
   }
 
+  static async consultar(filtro = {}) {
+
+    try {
+      const { db, client } = await connect();
+      const pedido = await
+        db.collection("pedido").findOne(filtro);
+      client.close();
+      return pedido;
+
+    } catch (error) {
+      console.log("Erro ao busca pedido:" + error);
+    }
+  }
+
 }
 
 module.exports = Pedido

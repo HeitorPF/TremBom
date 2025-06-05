@@ -25,6 +25,21 @@ Detalhes sobre as principais tabelas e suas relações:
 * **Restaurante:** Um `Restaurante` pode aceitar zero ou muitos `Pedidos`.
 * **Pedido:** Cada `Pedido` é associado a um único `Pagamento`.
 
+## Para rodar o projeto 
+
+### Pré-requisitos
+
+- Node.js
+- Mongo DB
+
+### Comandos
+
+Entre nas pasta backend e rode o comando abaixo: 
+
+```sh
+node app.js
+```
+
 ## 🤝 Colaboradores
 
 Este projeto foi desenvolvido por:
