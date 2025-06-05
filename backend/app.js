@@ -14,7 +14,22 @@ const server = http.createServer(async (req, res) => {
 
       const cliente = new Cliente("Heitor", "Heitor@gmail.com", "123456");
 
-      await cliente.inserir();
+      const clienteExistente = await Cliente.consultar({ email: cliente.email });
+
+      if (clienteExistente) {
+
+        res.end(`Cliente já existe! ID: ${clienteExistente._id}`);
+
+        console.log("Cliente já existe! ID:", clienteExistente._id)
+
+        return;
+
+      }
+      else {
+
+        await cliente.inserir();
+
+      }
 
       res.end('Cliente inserido com sucesso!');
 
@@ -98,10 +113,10 @@ const server = http.createServer(async (req, res) => {
 
       console.log(rest)
 
-      res.end('Restaurante atualizado com sucesso!');
+      res.end('Restaurante encontrado com sucesso!');
 
       // --------------------- PEDIDO ----------------------
-    } else if (req.method === 'POST' && req.url === '/inserir-pedido') {
+    } else if (req.method === 'POST' && req.url === '/inserir-pedido') {// ->> CRIAR PEDIDO
 
       const filtroCliente = { email: "Heitor@gmail.com" };
 
@@ -111,13 +126,13 @@ const server = http.createServer(async (req, res) => {
 
       const restaurante = await Restaurante.consultar(filtroRest)
 
-      const pedido = new Pedido(40, 80, cliente._id, restaurante._id) // ->> Cria pedido
+      const pedido = new Pedido(40, 80, cliente._id, restaurante._id)
 
       pedido.inserir()
 
       res.end(`Pedido feito!`)
 
-    } else if (req.method === 'DELETE' && req.url === '/excluir-pedido') {
+    } else if (req.method === 'DELETE' && req.url === '/excluir-pedido') { // ->> EXCLUIR PEDIDO
 
       const filtroCliente = { email: email, senha: senha };
 
@@ -131,7 +146,7 @@ const server = http.createServer(async (req, res) => {
 
       res.end(`Cliente encontrado! ID: ${cliente._id}`)
 
-    } else if (req.method === 'GET' && req.url === '/consultar-pedido') {
+    } else if (req.method === 'GET' && req.url === '/consultar-pedido') { // ->> CONSULTAR PEDIDO
 
       const filtroCliente = { email: "Heitor@gmail.com" };
 
@@ -166,6 +181,8 @@ const server = http.createServer(async (req, res) => {
 
 
 );
+
+
 
 const PORT = 8000;
 
