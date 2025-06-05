@@ -45,6 +45,9 @@ const server = http.createServer(async (req, res) => {
 
         console.log("cliente não encontrado")
 
+        res.end("Cliente não existe");
+
+
         return;
 
       }
@@ -59,7 +62,7 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'PUT' && req.url === '/atualizar-cliente') { // ATUALIZAR CLIENTE
 
-      const filtro = { email: email, senha: senha };
+      const filtro = { email: "Heitor@gmail.com" };
 
       const novosDados = { nome: "Joao" };
 
@@ -70,13 +73,23 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'GET' && req.url === '/consultar-cliente') { // CONSULTAR CLIENTE !!
 
-      const filtro = { nome: "Heitor" };
+      const filtro = { email: "Heitor@gmail.com" };
 
       const cliente = await Cliente.consultar(filtro);
 
+      if (!cliente) {
+
+        console.log("Cliente não existe");
+
+        res.end("Cliente não existe");
+
+        return;
+      }
+
       console.log(`Cliente encontrado! ID: `, cliente);
 
-      res.end(`Cliente encontrado! ID: ${cliente._id}`)
+      res.end('Cliente consultado!');
+
 
       // --------------------- RESTAURANTE ----------------------
     } else if (req.method === 'POST' && req.url === '/inserir-restaurante') { // INSERIR RESTUARANTE
@@ -89,7 +102,19 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'DELETE' && req.url === '/deletar-restaurante') { // DELETAR RESTAURANTE
 
-      const nomeRestaurante = "Estação";
+      const filtro = { restaurante_nome: "Estação" };
+
+      const restaurante = await Restaurante.consultar(filtro);
+
+      if (!restaurante) {
+
+        console.log("Restaurante não foi encontrado.");
+
+        res.end("Restaurante não existe");
+
+        return;
+
+      }
 
       await Restaurante.excluir(nomeRestaurante)
 
@@ -111,7 +136,14 @@ const server = http.createServer(async (req, res) => {
 
       const rest = await Restaurante.consultar(filtro);
 
-      console.log(rest)
+      if (!rest) {
+
+        console.log("Restaurante não existe");
+
+        res.end("Restaurante não existe");
+
+        return;
+      }
 
       res.end('Restaurante encontrado com sucesso!');
 
@@ -132,9 +164,9 @@ const server = http.createServer(async (req, res) => {
 
       res.end(`Pedido feito!`)
 
-    } else if (req.method === 'DELETE' && req.url === '/excluir-pedido') { // ->> EXCLUIR PEDIDO
+    } else if (req.method === 'DELETE' && req.url === '/deletar-pedido') { // ->> EXCLUIR PEDIDO
 
-      const filtroCliente = { email: email, senha: senha };
+      const filtroCliente = { email: "Heitor@gmail.com" };
 
       const cliente = await Cliente.consultar(filtroCliente);
 
@@ -152,11 +184,34 @@ const server = http.createServer(async (req, res) => {
 
       const cliente = await Cliente.consultar(filtroCliente);
 
-      const filtroPedido = { cliente_id: cliente._id }
+      if (!cliente) {
 
-      const pedido = await Pedido.consultar(filtroPedido);
+        console.log("Cliente não existe");
 
-      console.log(pedido)
+        res.end("CLiente não encontrado");
+
+        return;
+      }
+
+      else {
+
+        const filtroPedido = { cliente_id: cliente._id }
+
+        const pedido = await Pedido.consultar(filtroPedido);
+
+        if (!pedido) {
+
+          console.log("Pedido não encontrado");
+
+          res.end("Pedido não encontrado");
+
+          return;
+        }
+
+        console.log(pedido)
+
+      }
+
 
       res.end(`Pedido encontrado!`);
 

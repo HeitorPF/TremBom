@@ -37,7 +37,16 @@ curl -X PUT http://localhost:8000/atualizar-cliente
 curl -X GET http://localhost:8000/consultar-cliente
 ```
 
-
+O resultado é semelhante à:
+```sh
+Requisição recebida: GET /consultar-cliente
+Cliente encontrado! ID:  {
+  _id: new ObjectId('6838bd65b565280bd295d294'),
+  nome: 'Heitor',
+  email: 'heitor@gmail.com',
+  senha: '123456'
+}
+```
 
 ### Para testar as rotas - RESTAURANTE
 
@@ -86,10 +95,6 @@ curl -X POST http://localhost:8000/inserir-pedido
 curl -X DELETE http://localhost:8000/deletar-pedido
 ```
 
-### 🟡 Atualizar pedido
-```sh
-curl -X PUT http://localhost:8000/atualizar-pedido
-```
 
 ### 🔍 Consultar pedido
 
