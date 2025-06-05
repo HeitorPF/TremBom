@@ -1,11 +1,20 @@
 # BACKEND 
 
-## 1º Rodar o comando 
+## 🛠 Rodando o servidor
+1️⃣ Abra o primeiro terminal e navegue até a pasta do backend:
+```sh
+cd backend
+```
+2️⃣ Execute o comando para iniciar o servidor:
 ```sh
 node app.js
 ```
 
-## Para testar as rotas - CLIENTE
+No primeiro terminal (onde o servidor está rodando), veja os logs para verificar se as requisições foram processadas corretamente, que sao feitas pelos comandos a seguir:
+
+3️⃣ No segundo terminal, envie requisições com curl:
+
+### Para testar as rotas - CLIENTE
 
 ### 🟢 Inserir cliente
 ```sh
@@ -30,7 +39,7 @@ curl -X GET http://localhost:8000/consultar-cliente
 
 
 
-## Para testar as rotas - RESTAURANTE
+### Para testar as rotas - RESTAURANTE
 
 ### 🟢 Inserir restaurante
 ```sh
@@ -65,7 +74,7 @@ Requisição recebida: GET /consultar-restaurante
 ```
 
 
-## Para testar as rotas - PEDIDO
+### Para testar as rotas - PEDIDO
 
 ### 🟢 Inserir pedido
 ```sh
