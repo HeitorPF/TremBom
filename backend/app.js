@@ -2,6 +2,8 @@ const http = require('http');
 const Cliente = require("./controllers/cliente");
 const Restaurante = require("./controllers/restaurante");
 const Pedido = require('./controllers/pedido')
+const Pagamento = require('./controllers/pagamento');
+const { ObjectId } = require('mongodb');
 
 
 const server = http.createServer(async (req, res) => {
@@ -214,7 +216,44 @@ const server = http.createServer(async (req, res) => {
 
 
       res.end(`Pedido encontrado!`);
+      // --------------------------------- PAGAMENTO ----------------------------------
+    } else if (req.method === 'POST' && req.url === '/inserir-pagamento') { // INSERIR PAGAMENTO
 
+      const pagamento = new Pagamento(false, 54.99, "05/06/2025", "dinheiro", new ObjectId('6831027db8f4b7256a3f7712'));
+
+      await pagamento.inserir()
+
+      res.end('Pagamento inserido com sucesso!');
+
+    } else if (req.method === 'DELETE' && req.url === '/deletar-pagamento') { // DELETAR PAGAMENTO
+      
+      const pagamento_id = new ObjectId('6841e6d56908ce2e1d292018')
+      await Pagamento.excluir(pagamento_id)
+
+      res.end('Pagamento excluído com sucesso!');
+
+    } else if (req.method === 'PUT' && req.url === '/atualizar-pagamento') { // ATUALIZAR PAGAMENTO
+
+      const pagamento_id = new ObjectId('6841e9e6f8a761a3a7c490e7')
+
+      const filtro = { _id: pagamento_id };
+
+      const novosDados = { pago: true };
+
+      await Pagamento.atualizar(filtro, novosDados);
+
+      res.end('pagamento atualizado com sucesso!');
+
+    } else if (req.method === 'GET' && req.url === '/consultar-pagamento') { // CONSULTAR PAGAMENTO
+
+      const pagamento_id = new ObjectId('6841e9e6f8a761a3a7c490e7')
+      const filtro = { _id: pagamento_id };
+
+      const pagamento = await Pagamento.consultar(filtro);
+
+      console.log(`Pagamento encontrado! ID: `, pagamento);
+
+      res.end('Cliente consultado!');
     }
     else {
 
