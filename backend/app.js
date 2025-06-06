@@ -5,6 +5,7 @@ const Pedido = require('./controllers/pedido')
 const Pagamento = require('./controllers/pagamento');
 const { ObjectId } = require('mongodb');
 
+const email = 'brena@gmail.com'
 
 const server = http.createServer(async (req, res) => {
 
@@ -14,7 +15,7 @@ const server = http.createServer(async (req, res) => {
     // --------------------- CLIENTE ----------------------
     if (req.method === 'POST' && req.url === '/inserir-cliente') { // INSERIR CLIENTE
 
-      const cliente = new Cliente("Heitor", "Heitor@gmail.com", "123456");
+      const cliente = new Cliente("Brena", "brena@gmail.com", "123456");
 
       const clienteExistente = await Cliente.consultar({ email: cliente.email });
 
@@ -37,7 +38,7 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'DELETE' && req.url === '/deletar-cliente') { // DELETAR CLIENTE
 
-      const filtro = { email: "Heitor@gmail.com" };
+      const filtro = { email: email };
 
       const cliente = await Cliente.consultar(filtro);
 
@@ -48,7 +49,6 @@ const server = http.createServer(async (req, res) => {
         console.log("cliente não encontrado")
 
         res.end("Cliente não existe");
-
 
         return;
 
@@ -64,9 +64,9 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'PUT' && req.url === '/atualizar-cliente') { // ATUALIZAR CLIENTE
 
-      const filtro = { email: "Heitor@gmail.com" };
+      const filtro = { email: email };
 
-      const novosDados = { nome: "Joao" };
+      const novosDados = { nome: "Brenda" };
 
       await Cliente.atualizar(filtro, novosDados);
 
@@ -75,7 +75,7 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'GET' && req.url === '/consultar-cliente') { // CONSULTAR CLIENTE !!
 
-      const filtro = { email: "Heitor@gmail.com" };
+      const filtro = { email: email };
 
       const cliente = await Cliente.consultar(filtro);
 
@@ -96,7 +96,7 @@ const server = http.createServer(async (req, res) => {
       // --------------------- RESTAURANTE ----------------------
     } else if (req.method === 'POST' && req.url === '/inserir-restaurante') { // INSERIR RESTUARANTE
 
-      const restaurante = new Restaurante("Estação", "09:00", "12:00");
+      const restaurante = new Restaurante("Piriri", "09:00", "12:00");
 
       await restaurante.inserir();
 
@@ -104,7 +104,7 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'DELETE' && req.url === '/deletar-restaurante') { // DELETAR RESTAURANTE
 
-      const filtro = { restaurante_nome: "Estação" };
+      const filtro = { restaurante_nome: "Piriri" };
 
       const restaurante = await Restaurante.consultar(filtro);
 
@@ -118,13 +118,13 @@ const server = http.createServer(async (req, res) => {
 
       }
 
-      await Restaurante.excluir(nomeRestaurante)
+      await Restaurante.excluir(restaurante.restaurante_nome)
 
       res.end('Restaurante excluído com sucesso!');
 
     } else if (req.method === 'PUT' && req.url === '/atualizar-restaurante') { // ATUALIZAR RESTAURANTE
 
-      const filtro = { restaurante_nome: "Estação" };
+      const filtro = { restaurante_nome: "Piriri" };
 
       const novosDados = { horario_abertura: "10:00", horario_fechamento: "14:00" };
 
@@ -134,7 +134,7 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'GET' && req.url === '/consultar-restaurante') { // CONSULTAR RESTAURANTE !!
 
-      const filtro = { restaurante_nome: "Estação" };
+      const filtro = { restaurante_nome: "Piriri" };
 
       const rest = await Restaurante.consultar(filtro);
 
@@ -146,35 +146,35 @@ const server = http.createServer(async (req, res) => {
 
         return;
       }
-
+      console.log(rest)
       res.end('Restaurante encontrado com sucesso!');
 
       // --------------------- PEDIDO ----------------------
     } else if (req.method === 'POST' && req.url === '/inserir-pedido') {// ->> CRIAR PEDIDO
 
-      const filtroCliente = { email: "Heitor@gmail.com" };
+      const filtroCliente = { email: email };
 
       const cliente = await Cliente.consultar(filtroCliente);
 
-      const filtroRest = { restaurante_nome: "Estação" }
+      const filtroRest = { restaurante_nome: "Piriri" }
 
       const restaurante = await Restaurante.consultar(filtroRest)
 
-      const pedido = new Pedido(40, 80, cliente._id, restaurante._id)
+      const pedido = new Pedido(4, 60, cliente._id, restaurante._id)
 
-      pedido.inserir()
+      await pedido.inserir()
 
       res.end(`Pedido feito!`)
 
     } else if (req.method === 'DELETE' && req.url === '/deletar-pedido') { // ->> EXCLUIR PEDIDO
 
-      const filtroCliente = { email: "Heitor@gmail.com" };
+      const filtroCliente = { email: email };
 
       const cliente = await Cliente.consultar(filtroCliente);
 
       console.log(cliente)
 
-      Pedido.excluir(cliente._id)
+      await Pedido.excluir(cliente._id)
 
       console.log('Pedidos excluidos');
 
@@ -182,7 +182,7 @@ const server = http.createServer(async (req, res) => {
 
     } else if (req.method === 'GET' && req.url === '/consultar-pedido') { // ->> CONSULTAR PEDIDO
 
-      const filtroCliente = { email: "Heitor@gmail.com" };
+      const filtroCliente = { email: email };
 
       const cliente = await Cliente.consultar(filtroCliente);
 
@@ -218,15 +218,34 @@ const server = http.createServer(async (req, res) => {
       res.end(`Pedido encontrado!`);
       // --------------------------------- PAGAMENTO ----------------------------------
     } else if (req.method === 'POST' && req.url === '/inserir-pagamento') { // INSERIR PAGAMENTO
+      
+      const filtroCliente = {email: email}
+      const cliente = await Cliente.consultar(filtroCliente)
 
-      const pagamento = new Pagamento(false, 54.99, "05/06/2025", "dinheiro", new ObjectId('6831027db8f4b7256a3f7712'));
+      if(!cliente) {
+        console.log("Cliente não existe");
+
+        res.end("CLiente não encontrado");
+
+        return;
+      }
+      const pedido = await Pedido.consultar({cliente_id: cliente._id})
+      if(!pedido) {
+        console.log("Pedido não existe");
+
+        res.end("Pedido não encontrado");
+
+        return;
+      }
+      console.log(pedido)
+      const pagamento = new Pagamento(false, 22.12, "07/06/2025", "cartão", pedido._id);
 
       await pagamento.inserir()
 
       res.end('Pagamento inserido com sucesso!');
 
     } else if (req.method === 'DELETE' && req.url === '/deletar-pagamento') { // DELETAR PAGAMENTO
-      
+
       const pagamento_id = new ObjectId('6841e6d56908ce2e1d292018')
       await Pagamento.excluir(pagamento_id)
 
@@ -253,7 +272,7 @@ const server = http.createServer(async (req, res) => {
 
       console.log(`Pagamento encontrado! ID: `, pagamento);
 
-      res.end('Cliente consultado!');
+      res.end('Pagamento consultado!');
     }
     else {
 
@@ -285,5 +304,3 @@ server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 
 });
-
-
