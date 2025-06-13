@@ -1,0 +1,41 @@
+[2025-06-13T12:52:41.620Z] Cliente inserido: {"nome":"Brena","email":"brena@gmail.com","_id":"684c1f1931d3fd3995eaa292"}
+[2025-06-13T12:52:53.811Z] Cliente inserido: {"nome":"Brena","email":"brena@gmail.com","_id":"684c1f2531d3fd3995eaa293"}
+[2025-06-13T13:13:48.243Z] Erro ao inserir cliente: TypeError: this.consultar is not a function
+[2025-06-13T13:14:49.377Z] Erro ao inserir cliente: ReferenceError: cliente is not defined
+[2025-06-13T13:15:58.863Z] Cliente já existe: brena@gmail.com
+[2025-06-13T13:16:34.040Z] Cliente já existe: brena@gmail.com
+[2025-06-13T13:16:35.795Z] Cliente já existe: brena@gmail.com
+[2025-06-13T13:17:23.946Z] Cliente já existe: joao@gmail.com
+[2025-06-13T13:17:23.978Z] Cliente não encontrado: {"email":"joao@gmail.com"}
+[2025-06-13T13:17:35.413Z] Cliente já existe: joasssso@gmail.com
+[2025-06-13T13:17:35.447Z] Cliente não encontrado: {"email":"joasssso@gmail.com"}
+[2025-06-13T13:17:37.319Z] Cliente já existe: joasssso@gmail.com
+[2025-06-13T13:17:37.338Z] Cliente não encontrado: {"email":"joasssso@gmail.com"}
+[2025-06-13T13:18:13.961Z] Cliente já existe: joasssso@gmail.com
+[2025-06-13T13:18:13.996Z] Cliente não encontrado: {"email":"joasssso@gmail.com"}
+[2025-06-13T13:19:25.672Z] Cliente já existe: joasssso@gmail.com
+[2025-06-13T13:19:25.705Z] Cliente não encontrado: {"email":"joasssso@gmail.com"}
+[2025-06-13T13:19:56.997Z] Cliente já existe: joasssso@gmail.com
+[2025-06-13T13:19:57.006Z] Cliente não encontrado: {"email":"joasssso@gmail.com"}
+[2025-06-13T13:21:22.163Z] Cliente inserido: {"nome":"Joao","email":"joasssso@gmail.com","_id":"684c25d295debdfd2e56d128"}
+[2025-06-13T13:21:30.214Z] Cliente inserido: {"nome":"Joao","email":"joasssso@gmail.com","_id":"684c25da95debdfd2e56d129"}
+[2025-06-13T13:21:31.987Z] Cliente inserido: {"nome":"Joao","email":"joasssso@gmail.com","_id":"684c25db95debdfd2e56d12a"}
+[2025-06-13T13:23:33.180Z] Cliente já existe: joasssso@gmail.com
+[2025-06-13T13:24:14.123Z] Cliente já existe: heitor@gmail.com
+[2025-06-13T13:24:14.147Z] Cliente não encontrado: {"email":"heitor@gmail.com"}
+[2025-06-13T13:25:58.096Z] Cliente não encontrado: {"email":"heitor@gmail.com"}
+[2025-06-13T13:25:58.106Z] Cliente inserido: {"nome":"Heitor","email":"heitor@gmail.com","_id":"684c26e6926ec9897fa290bd"}
+[2025-06-13T13:26:31.822Z] Cliente já existe: heitor@gmail.com
+[2025-06-13T13:27:46.386Z] Cliente já existe: heitor@gmail.com
+[2025-06-13T13:29:14.360Z] Cliente já existe: heitor@gmail.com
+[2025-06-13T13:29:45.826Z] Cliente já existe: heitor@gmail.com
+[2025-06-13T13:30:21.969Z] Cliente já existe: heitor@gmail.com
+[2025-06-13T13:30:36.025Z] Cliente já existe: heitor@gmail.com
+[2025-06-13T13:30:38.142Z] Cliente já existe: heitor@gmail.com
+[2025-06-13T14:05:58.743Z] Cliente Excluído: {"email":"brena@gmail.com"}
+[2025-06-13T14:06:50.931Z] Cliente Excluído: {"email":"heitor@gmail.com"}
+[2025-06-13T14:06:54.487Z] Cliente Excluído: {"email":"heitor@gmail.com"}
+[2025-06-13T14:06:56.212Z] Cliente Excluído: {"email":"heitor@gmail.com"}
+[2025-06-13T14:06:57.727Z] Cliente Excluído: {"email":"heitor@gmail.com"}
+[2025-06-13T14:07:36.479Z] Cliente Excluído: {"email":"heitor@gmail.com"}
+[2025-06-13T14:09:27.889Z] Nenhum cliente foi excluído: {"email":"hei@gmail.com"}
