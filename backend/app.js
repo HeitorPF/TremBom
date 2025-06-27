@@ -15,7 +15,7 @@ const server = http.createServer(async (req, res) => {
     // --------------------- CLIENTE ----------------------
     if (req.method === 'POST' && req.url === '/inserir-cliente') { // INSERIR CLIENTE
 
-      const cliente = new Cliente("Heitor", "heitor@gmail.com", "123456");
+      const cliente = new Cliente("Heitor", "heitor@gmail", "123456");
 
       const clienteExistente = await Cliente.consultar({ email: cliente.email });
 
