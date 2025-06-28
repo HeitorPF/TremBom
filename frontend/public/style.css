@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+main {
+    height: 31rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.logotipo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+img {
+    width: 70px;
+    height: 70px;
+}
+
+form {
+    margin: 10rem;
+    width: 300px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+
+}
+
+form a {
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+    font-size: 12px;
+}
+
+.form-group .form-control {
+    width: 100%;
+
+}
+
+form .btn-primary {
+
+    background-color: #000;
+    margin: auto;
+    border-color: #000;
+    width: 200px;
+}
+
+form .button-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.content-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+
+.content-title h1 {
+    font-size: 2rem;
+    text-align: left;
+    margin: 20px 0;
+
+}
+
+.content-carousel {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#carouselExampleFade {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.carousel-inner {
+    width: 300px;
+    position: relative;
+}
+
+.carousel-inner-2 {
+    width: 300px;
+    position: relative;
+}
+
+
+
+.carousel-item img {
+    display: block;
+    width: auto;
+    max-width: 90vw;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.carousel-image-small {
+    max-height: 800px;
+    max-width: 80%;
+    height: auto;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(170, 8, 8, 0.5);
+    border-radius: 50%;
+    padding: 10px;
+    width: 500px;
+}
+
+.btn-all {
+
+    margin: 5px auto;
+    width: 30%;
+    cursor: pointer;
+
+}
+
+.btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.card-body {
+    margin: 1rem;
+    width: 100%;
+}
+
+
+
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    margin-top: 40px;
+
+}

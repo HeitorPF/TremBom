@@ -1,4 +1,4 @@
-const { connect } = require("../db");
+const { connect } = require("../database/db");
 
 class Pedido {
   constructor(quantidade_itens, pedido_total, cliente_id, restaurante_id, _id = null) {

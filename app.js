@@ -1,8 +1,8 @@
 const http = require('http');
-const Cliente = require("./controllers/cliente");
-const Restaurante = require("./controllers/restaurante");
-const Pedido = require('./controllers/pedido')
-const Pagamento = require('./controllers/pagamento');
+const Cliente = require("./backend/controllers/cliente");
+const Restaurante = require("./backend/controllers/restaurante");
+const Pedido = require('./backend/controllers/pedido')
+const Pagamento = require('./backend/controllers/pagamento');
 const { ObjectId } = require('mongodb');
 
 const email = 'hei@gmail.com'

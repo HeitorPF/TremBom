@@ -1,0 +1,73 @@
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: white !important;
+}
+
+.dropdown-menu .dropdown-item {
+    color: black;
+}
+
+.logotipo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+
+}
+
+.logotipo img {
+    width: 70px;
+    height: 70px;
+}
+
+.content-carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 20rem;
+    width: 100%;
+}
+
+.card {
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    width: 158px;
+    height: 158px;
+    object-fit: cover;
+    margin: auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 80%;
+    margin: auto;
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    margin-top: 40px;
+
+}
