@@ -4,6 +4,19 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
 
 
 main {
@@ -168,5 +181,6 @@ footer {
     text-align: center;
     position: relative;
     margin-top: 40px;
+    bottom: 0;
 
 }

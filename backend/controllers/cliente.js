@@ -1,6 +1,6 @@
-const { connect } = require("../db");
+const { connect } = require("../database/db");
 const { logger } = require("../logger");
-const { Cliente } = require("../models/ClienteModel");
+const Cliente = require('../models/ClienteModel');
 
 class ClienteController {
   constructor(nome, email, senha, _id = null) {
@@ -16,21 +16,6 @@ class ClienteController {
       throw new Error("Nome, email e senha são obrigatórios.");
     }
 
-    if (typeof this.nome !== 'string' || typeof this.email !== 'string' || typeof this.senha !== 'string') {
-      logger("Erro: Nome, email e senha devem ser strings.");
-      throw new Error("Nome, email e senha devem ser strings.");
-    }
-
-    if (this.nome.length < 3) {
-      logger("Erro: Nome deve ter pelo menos 3 caracteres.");
-      throw new Error("Nome deve ter pelo menos 3 caracteres.");
-    }
-
-    if (!this.email.includes('@')) {
-      logger("Erro: Email inválido.");
-      throw new Error("Email inválido.");
-    }
-
     if (this.senha.length < 6) {
       logger("Erro: Senha deve ter pelo menos 6 caracteres.");
       throw new Error("Senha deve ter pelo menos 6 caracteres.");
@@ -43,8 +28,6 @@ class ClienteController {
     try {
 
       this.validar();
-
-      const { db, client } = await connect();
 
       const existeCliente = await ClienteController.consultar({ email: this.email });
 
@@ -106,9 +89,7 @@ class ClienteController {
   static async consultar(filtro = {}) {
     try {
 
-      const { db, client } = await connect();
-
-      const cliente = await db.collection("cliente").findOne(filtro);
+      const cliente = await Cliente.findOne(filtro);
 
       if (!cliente) {
 

@@ -31,12 +31,12 @@
           <li class="nav-item dropdown">
 
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Livros
+              Restaurantes
             </a>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Romance</a></li>
+              <li><a class="dropdown-item" href="#">Estação</a></li>
+              <li><a class="dropdown-item" href="#">Dona Benta</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -48,12 +48,12 @@
           <li class="nav-item dropdown">
 
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Autores
+              Produtos
             </a>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Romance</a></li>
+              <li><a class="dropdown-item" href="#">Bebidas</a></li>
+              <li><a class="dropdown-item" href="#">Salgados</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -69,8 +69,8 @@
             </a>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Romance</a></li>
+              <li><a class="dropdown-item" href="#">Comida Japonesa</a></li>
+              <li><a class="dropdown-item" href="#">Comida Artesanal</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -84,7 +84,7 @@
         <div class="d-flex" role="search">
 
           <form action="/logout" method="GET" style="margin: 0;">
-            <button class="btn btn-outline-danger" type="submit">Logout</button>
+            <button class="btn btn-outline-danger" type="submit" style=" padding: 5px">Logout</button>
           </form>
         </div>
 
@@ -103,52 +103,42 @@
 
 
   <div class="container">
-    <div class="content-carousel">
+    <div class="content-carousel" id="listaProdutos">
 
-      <div class="card" style="width: 18rem;">
-        <img src="../assets/hamburguer.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Hamburguer de carne</h5>
-          <p class="card-text">Descrição do hamburguer</p>
-          <a href="#" class="btn btn-primary btn-pedido">Adicionar ao carrinho</a>
-        </div>
-      </div>
+       
+    {{#each produto}}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
 
-      <div class="card card-2" style="width: 18rem;">
-        <img src="../assets/refri.png" class="card-img-top " alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Refrigerante</h5>
-          <p class="card-text">Descrição do refrigerante</p>
-          <a href="#" class="btn btn-primary btn-pedido">Adicionar ao carrinho</a>
-        </div>
-      </div>
+        <div class="item">
+          <p class="nome-produto">{{nome}}</p>
+          <p class="preco-produto"><strong>R${{preco}}</strong></p>
+          <a href="#" class="btn btn-primary btn-pedido" data-id="{{_id}}">Adicionar ao carrinho</a>
 
-      <div class="card" style="width: 18rem;">
-        <img src="../assets/frango.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Hamburguer de frango</h5>
-          <p class="card-text">Descrição do hamburguer</p>
-          <a href="#" class="btn btn-primary btn-pedido">Adicionar ao carrinho</a>
         </div>
+
       </div>
+    </div>
+
+      {{/each}}
+
 
     </div>
   </div>
+
+  
 
   <div class="container">
     <form id="pedidoForm" action="/realizar-pedido" method="post">
 
       <div class="form-group">
         <label for="inputItens">Usuário</label>
-        <input type="text" class="form-control" id="inputItens" aria-describedby="emailHelp" name="item">
       </div>
       <div class="form-group">
         <label for="inputQuantidade">Quantidade</label>
-        <input type="number" class="form-control" id="inputQuantidade" name="quantidade">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Senha</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
+        <label for="exampleInputPassword1">Total</label>
       </div>
 
       <div class="button-form">

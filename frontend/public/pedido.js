@@ -1,65 +1,34 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const botoes = document.querySelectorAll('.btn-pedido');
+    
+    botoes.forEach(botao => {
+      botao.addEventListener('click', async (e) => {
+        e.preventDefault();
 
-const btnPedido = document.querySelectorAll('.btn-pedido');
-btnPedido.forEach((btn) => {
-    btn.addEventListener('click', async (event) => {
-        event.preventDefault();
-        const card = event.target.closest('.card');
-        if (card) {
-            const title = card.querySelector('.card-title').textContent;
-            alert(`Você adicionou ${title} ao carrinho!`);
+        const produtoId = botao.getAttribute('data-id');
+        const preco = botao.closest('.item').querySelector('.preco-produto strong').textContent.replace('R$', '').replace(',', '.');
 
-            const data = {
-                item: title
-            };
-
-            try {
-                const response = await fetch('/item', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    console.log('Item adicionado com sucesso!');
-                } else {
-                    const result = await response.json();
-                    console.error('Erro ao adicionar item:', result.message);
-                }
-            } catch (error) {
-                console.error('Erro durante a requisição:', error);
-                alert('Ocorreu um erro ao adicionar o item.');
-            }
-        }
-    });
-});
-
-const pedidoForm = document.getElementById('pedidoForm');
-pedidoForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(pedidoForm);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-        const response = await fetch('/pedido', {
+        console.log(produtoId,preco)
+        try {
+          const resposta = await fetch('/carrinho', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
-        });
+            body: JSON.stringify({
+              _id: produtoId,
+              preco: parseFloat(preco)
+            })
+          });
 
-        if (response.ok) {
-            alert('Pedido realizado com sucesso!');
-            window.location.href = '/pedido';
-        } else {
-            const result = await response.json();
-            alert(`Erro ao realizar pedido: ${result.message}`);
+          if (resposta.ok) {
+            console.log('Produto adicionado ao carrinho com sucesso');
+          } else {
+            console.error('Erro ao adicionar produto');
+          }
+        } catch (erro) {
+          console.error('Erro na requisição:', erro);
         }
-    } catch (error) {
-        console.error('Error during order submission:', error);
-        alert('Ocorreu um erro ao tentar realizar o pedido.');
-    }
-});
+      });
+    });
+  });

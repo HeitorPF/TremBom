@@ -1,25 +1,16 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require('mongoose');
 
-const url = "mongodb://localhost:27017";
+async function mongooseConnect() {
+  try {
+    await mongoose.connect('mongodb://localhost:27017/TremBom', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-const dbName = "TremBom";
-
-async function connect() {
-
-    if (!url) {
-        throw new Error("MongoDB connection URL is not defined");
-    }
-    if (!dbName) {
-        throw new Error("Database name is not defined");
-    }
-
-    const client = new MongoClient(url);
-
-    await client.connect();
-
-    const db = client.db(dbName);
-
-    return { db, client };
+    console.log('✅ Conectado ao MongoDB com Mongoose');
+  } catch (error) {
+    console.error('Erro ao conectar ao MongoDB:', error);
+  }
 }
 
-module.exports = { connect }
+module.exports = mongooseConnect;
