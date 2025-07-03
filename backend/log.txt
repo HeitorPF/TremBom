@@ -1,0 +1,57 @@
+[2025-07-03T16:56:46.236Z] Cliente nome e senha corretos:{"nome":"admin","senha":"123"}
+[2025-07-03T16:56:46.251Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T16:56:46.292Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T16:57:11.866Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T16:59:35.240Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T16:59:35.528Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T16:59:38.463Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T17:06:54.574Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T18:33:44.888Z] Cliente nome e senha corretos:{"nome":"admin","senha":"123"}
+[2025-07-03T18:33:44.915Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T18:33:45.019Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T18:34:33.798Z] Cliente nome e senha corretos:{"nome":"admin","senha":"123"}
+[2025-07-03T18:34:33.807Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T18:34:33.849Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T18:34:37.660Z] Cliente nome ou senha incorretos:{"nome":"admin","senha":"1111"}
+[2025-07-03T18:35:06.240Z] Cliente não encontrado: {"nome":"SA","senha":"12"}
+[2025-07-03T18:35:20.063Z] Cliente não encontrado: {"nome":"WS","senha":"SASA"}
+[2025-07-03T18:35:38.643Z] Cliente não encontrado: {"nome":"DS","senha":"DS"}
+[2025-07-03T18:36:07.793Z] Cliente não encontrado: {"nome":"sa","senha":"sa"}
+[2025-07-03T18:36:24.964Z] Cliente não encontrado: {"nome":"sa","senha":"sa"}
+[2025-07-03T18:37:32.951Z] Cliente não encontrado: {"nome":"sa","senha":"sa"}
+[2025-07-03T18:39:36.333Z] Cliente não encontrado: {"nome":"sa","senha":"sa"}
+[2025-07-03T18:40:32.177Z] Cliente não encontrado: {"nome":"sa","senha":"sa"}
+[2025-07-03T18:40:41.082Z] Cliente não encontrado: {"nome":"sa","senha":"sa"}
+[2025-07-03T18:42:23.742Z] Cliente não encontrado: {"nome":"s","senha":"s"}
+[2025-07-03T18:45:05.343Z] Cliente nome ou senha incorretos:{"nome":"admin","senha":"aaa"}
+[2025-07-03T19:48:42.089Z] Erro: Senha deve ter pelo menos 6 caracteres.
+[2025-07-03T19:48:42.089Z] Erro ao inserir cliente: Error: Senha deve ter pelo menos 6 caracteres.
+[2025-07-03T19:49:19.708Z] Cliente não encontrado: {"email":"sa@gmail.com"}
+[2025-07-03T19:49:19.708Z] Erro ao inserir cliente: ReferenceError: db is not defined
+[2025-07-03T19:50:20.905Z] Cliente não encontrado: {"email":"sa@gmail.com"}
+[2025-07-03T19:50:20.926Z] Cliente inserido: {"nome":"sasa","email":"sa@gmail.com"}
+[2025-07-03T19:50:39.282Z] Cliente não encontrado: {"email":"sa@gmail.com"}
+[2025-07-03T19:50:39.289Z] Erro ao inserir cliente: MongoServerError: E11000 duplicate key error collection: TremBom.Cliente index: email_1 dup key: { email: "sa@gmail.com" }
+[2025-07-03T19:52:35.121Z] Cliente não encontrado: {"email":"sa@gmail.com"}
+[2025-07-03T19:52:35.140Z] Cliente inserido: {"nome":"sa","email":"sa@gmail.com"}
+[2025-07-03T19:55:11.755Z] Cliente não encontrado: {"email":"sa@gmail.com"}
+[2025-07-03T19:55:11.763Z] Cliente inserido: {"nome":"sa","email":"sa@gmail.com"}
+[2025-07-03T19:58:57.602Z] Cliente não encontrado: {"email":"sa@gmail.com"}
+[2025-07-03T19:58:57.613Z] Cliente inserido: {"nome":"sa","email":"sa@gmail.com"}
+[2025-07-03T20:02:31.444Z] Cliente não encontrado: {"email":"gina@gmail.com"}
+[2025-07-03T20:02:31.458Z] Cliente inserido: {"nome":"gina","email":"gina@gmail.com"}
+[2025-07-03T20:02:42.538Z] Cliente nome e senha corretos:{"nome":"gina","senha":"963"}
+[2025-07-03T20:02:42.555Z] Cliente encontrado:{"_id":"6866e1d7bb942360ec5097ea"}
+[2025-07-03T20:02:42.594Z] Cliente encontrado:{"_id":"6866e1d7bb942360ec5097ea"}
+[2025-07-03T20:02:51.628Z] Cliente encontrado:{"_id":"6866e1d7bb942360ec5097ea"}
+[2025-07-03T20:02:51.785Z] Cliente encontrado:{"_id":"6866e1d7bb942360ec5097ea"}
+[2025-07-03T20:05:04.388Z] Cliente não encontrado: {"email":"harry@gmail.com"}
+[2025-07-03T20:05:04.420Z] Cliente inserido: {"nome":"harry","email":"harry@gmail.com"}
+[2025-07-03T20:06:23.460Z] Cliente nome e senha corretos:{"nome":"harry","senha":"852"}
+[2025-07-03T20:06:23.471Z] Cliente encontrado:{"_id":"6866e2709584124933d73535"}
+[2025-07-03T20:06:23.510Z] Cliente encontrado:{"_id":"6866e2709584124933d73535"}
+[2025-07-03T20:06:40.499Z] Cliente nome e senha corretos:{"nome":"harry","senha":"852"}
+[2025-07-03T20:06:40.506Z] Cliente encontrado:{"_id":"6866e2709584124933d73535"}
+[2025-07-03T20:06:40.537Z] Cliente encontrado:{"_id":"6866e2709584124933d73535"}
+[2025-07-03T20:06:45.581Z] Cliente encontrado:{"_id":"6866e2709584124933d73535"}
+[2025-07-03T20:06:45.727Z] Cliente encontrado:{"_id":"6866e2709584124933d73535"}

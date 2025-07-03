@@ -156,6 +156,24 @@ app.get('/logout', (req, res) => {
     }
 });
 
+app.post('/register', async (req, res) => {
+    try {
+        const { nome, email, senha } = req.body;
+        const cliente = new Cliente(nome, email, senha); 
+        const result = await cliente.inserir(); 
+
+        if (result) {
+            return res.status(200).json({ message: 'Cadastro realizado com sucesso!', userId: result.insertedId });
+        } else {
+           
+            return res.status(409).json({ message: 'Este e-mail já está cadastrado.' });
+        }
+    } catch (error) {
+   
+        console.error('Erro ao processar cadastro:', error);
+        return res.status(500).json({ message: 'Erro interno do servidor ao cadastrar.', error: error.message });
+    }
+});
 
 app.post('/login', async (req, res) => {
     try {
