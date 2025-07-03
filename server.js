@@ -159,7 +159,7 @@ app.post('/login', async (req, res) => {
             });
         }
 
-        const filtro = { nome: nome };
+        const filtro = { nome: nome , senha: senha};
         dadosExiste = await Cliente.consultar(filtro);
 
         console.log('dados existe:', dadosExiste);
