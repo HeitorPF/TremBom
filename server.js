@@ -29,7 +29,7 @@ app.use(
         secret: 'segredo_super_secreto',
         resave: false,
         saveUninitialized: false,
-        cookie: { maxAge: 60000 }
+        cookie: { maxAge: 6000000 }
     })
 );
 
@@ -50,11 +50,17 @@ app.get('/index', checkLogin, async (req, res) => {
     
     const filtro = { _id: req.session.usuarioId};
 
+    console.log("cliente id para criar o carrinho",filtro);
+
     const usuario = await Cliente.consultarById(filtro);
     const listaDeProdutos = await Produto.listaProdutos(); 
     const listarCarrinho = await Carrinho.listaCarrinho(usuario._id); 
+
+    console.log(listarCarrinho);
+
     let quantidade = 0
     listarCarrinho.itens.forEach((item) => {
+    
         quantidade += item.quantidade
     })
 
@@ -99,6 +105,8 @@ app.post('/carrinho', async (req,res) => {
 app.get('/carrinho', async (req,res) => {
     try{
         const { usuarioId } = req.session.usuarioId;
+
+        console.log("carrido do cliente id ",req.session.usuarioId);
 
         const listarCarrinho = await Carrinho.listaCarrinho(usuarioId); 
 

@@ -25,6 +25,18 @@ Detalhes sobre as principais tabelas e suas relações:
 * **Restaurante:** Um `Restaurante` pode aceitar zero ou muitos `Pedidos`.
 * **Pedido:** Cada `Pedido` é associado a um único `Pagamento`.
 
+### Páginas do site
+
+#### Login
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+#### Index
+![alt text](image-5.png)
+
+![alt text](image-8.png)
+
 ## 🤝 Colaboradores
 
 Este projeto foi desenvolvido por:

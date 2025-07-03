@@ -129,26 +129,41 @@
 
     </div>
   </div>
-  
 
-  <div class="container">
-    <form id="pedidoForm" action="/realizar-pedido" method="post">
-      <div class="form-group">
-        <label for="inputItens">Usuário: {{usuario}}</label>
-      </div>
-      <div class="form-group">
-        <label for="inputQuantidade">Quantidade: {{quantidade}}</label>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Total: {{carrinho.total}}</label>
-      </div>
+  <div class="button-carrinho">
 
-      <div class="button-form">
-        <button type="submit" class="btn btn-primary">Finalizar Pedido</button>
+    <button onclick="abrirPopup()" class="btn btn-primary">Ver carrinho</button>
 
-      </div>
-    </form>
   </div>
+
+
+  <div id="popup" class="popup">
+    <div class="popup-conteudo">
+
+      <span class="fechar" onclick="fecharPopup()">&times;</span>
+
+      <h3>Resumo do Pedido</h3>
+
+      <p>Usuário: **{{usuario}}**</p>
+
+      <h4>Itens do Pedido:</h4>
+      <ul>
+        {{#each carrinho.itens}}
+        <li>
+          Produto ID: {{this.produtoId}}<br>
+          Quantidade: {{this.quantidade}}<br>
+          Preço Total: R$ {{this.preco}}
+        </li>
+        {{/each}}
+      </ul>
+
+      <p>Quantidade Total de Itens: **{{quantidade}}**</p>
+
+      <p class="total-line">Total do Pedido: **R$ {{carrinho.total}}**</p>
+
+    </div>
+</div>
+
 
   <footer>
 

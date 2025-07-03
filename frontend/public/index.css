@@ -86,3 +86,149 @@ footer {
 .imagem-produto {
     height: 100px;
 }
+.button-carrinho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* Fundo com leve blur e transição suave */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0,0,0,0.5);
+  transition: opacity 0.3s ease;
+}
+
+/* Estilo do conteúdo com sombra e fonte moderna */
+.popup-conteudo {
+  background-color: #fff;
+  margin: 8% auto;
+  padding: 30px 40px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.popup-conteudo h3 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.popup-conteudo h4 {
+  color: #555;
+  font-size: 18px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.popup-conteudo p {
+  font-size: 17px;
+  color: #444;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+/* --- Estilos para os Itens do Carrinho --- */
+
+.popup-conteudo ul {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin: 0 0 20px 0; /* Add some margin below the list */
+}
+
+.popup-conteudo ul li {
+  background-color: #f9f9f9; /* Light background for each item */
+  border: 1px solid #e0e0e0; /* Subtle border */
+  border-radius: 8px; /* Slightly rounded corners */
+  padding: 12px 15px;
+  margin-bottom: 10px; /* Space between items */
+  font-size: 15px;
+  color: #555;
+  line-height: 1.5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Soft shadow for depth */
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Stack content vertically */
+  position: relative; /* For potential future additions like delete icons */
+}
+
+.popup-conteudo ul li strong {
+  color: #333; /* Make product name/ID stand out */
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block; /* Ensures it takes its own line */
+}
+
+/* Individual detail lines within list item */
+.popup-conteudo ul li span {
+  display: block; /* Each detail on a new line */
+  font-size: 14px;
+  color: #666;
+  padding-left: 5px; /* Indent details slightly */
+}
+
+/* Style for the "Produto ID" if it's not meant to be a separate strong tag */
+.popup-conteudo ul li .product-id {
+  font-size: 13px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* --- Fim dos Estilos para os Itens do Carrinho --- */
+
+.popup-conteudo .total-line {
+  font-size: 20px; /* Larger font for total */
+  color: #007bff; /* A prominent color like blue */
+  font-weight: bold; /* Make it bold */
+  margin-top: 20px; /* More space above it */
+  padding-top: 10px; /* A little padding at the top */
+  border-top: 1px dashed #eee; /* A subtle dashed line above it */
+  text-align: right; /* Align total to the right for financial look */
+}
+
+.fechar {
+  float: right;
+  font-size: 22px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.fechar:hover {
+  color: #ff5050;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .popup-conteudo {
+    margin: 5% auto;
+    padding: 20px 25px;
+    width: 95%;
+  }
+  .popup-conteudo p,
+  .popup-conteudo ul li {
+    font-size: 15px;
+  }
+  .popup-conteudo .total-line {
+    font-size: 18px;
+  }
+  .fechar {
+    font-size: 20px;
+  }
+}
