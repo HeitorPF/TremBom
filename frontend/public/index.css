@@ -76,3 +76,13 @@ footer {
     margin-top: 40px;
 
 }
+
+.container-imagem-produto {
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+.imagem-produto {
+    height: 100px;
+}

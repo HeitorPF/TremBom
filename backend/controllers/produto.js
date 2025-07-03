@@ -1,10 +1,11 @@
 const Produto = require('../models/ProdutoModel');
 
 class ProdutoController {
-  constructor(nome, preco, _id = null) {
+  constructor(nome, preco, urlImagem, _id = null) {
     this._id = _id;
     this.nome = nome;
     this.preco = preco;
+    this.urlImagem = urlImagem;
   }
 
   async inserir() {
@@ -17,7 +18,8 @@ class ProdutoController {
 
       const novoProduto = new Produto({
         nome: this.nome,
-        preco: this.preco
+        preco: this.preco,
+        urlImagem: this.urlImagem,
       });
 
       const salvo = await novoProduto.save();

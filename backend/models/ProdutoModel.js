@@ -8,6 +8,10 @@ const ProdutoSchema = new mongoose.Schema({
   preco: {
     type: Number,
     required: true
+  },
+  urlImagem: { 
+    type: String, 
+    required: true 
   }
 }, { timestamps: true });
 
