@@ -8,3 +8,25 @@
 [2025-07-03T08:24:52.477Z] Cliente não encontrado: {"nome":"hei"}
 [2025-07-03T08:28:06.897Z] Cliente não encontrado: {"nome":"Heitor","senha":"44"}
 [2025-07-03T08:28:32.444Z] Cliente não encontrado: {"nome":"Heitor","senha":"123"}
+[2025-07-03T13:49:59.105Z] Cliente não encontrado: {"nome":"admin","senha":"1234"}
+[2025-07-03T13:50:02.447Z] Cliente não encontrado: {"nome":"admin","senha":"123"}
+[2025-07-03T13:50:08.212Z] Cliente não encontrado: {"nome":"admin","senha":"123"}
+[2025-07-03T13:50:45.684Z] Cliente não encontrado: {"nome":"admin","senha":"123"}
+[2025-07-03T13:51:44.669Z] Cliente não encontrado: {"nome":"admin","senha":"123"}
+[2025-07-03T13:57:27.672Z] Cliente não encontrado: {"nome":"dsds"}
+[2025-07-03T14:00:51.772Z] Cliente não encontrado: {"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:00:51.808Z] Cliente não encontrado: {"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:00:54.147Z] Cliente não encontrado: {"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:01:22.756Z] Cliente não encontrado: {"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:01:22.795Z] Cliente não encontrado: {"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:04:40.224Z] Cliente não encontrado: {"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:04:40.274Z] Cliente não encontrado: {"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:17:41.381Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:17:41.458Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:18:56.489Z] Cliente nome e senha corretos:{"nome":"admin","senha":"123"}
+[2025-07-03T14:18:56.510Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:18:56.580Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:19:40.756Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:19:41.210Z] Cliente encontrado:{"_id":"68605855b4eda9e61b711afb"}
+[2025-07-03T14:19:47.771Z] Cliente não encontrado: {"nome":"sss","senha":"sss"}
+[2025-07-03T14:20:42.533Z] Cliente nome ou senha incorretos:{"nome":"admin","senha":"dasda"}

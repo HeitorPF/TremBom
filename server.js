@@ -47,7 +47,10 @@ function checkLogin(req, res, next) {
 }
 app.get('/index', checkLogin, async (req, res) => {
   try {
-    const usuario = await Cliente.consultar({ _id: req.session.usuarioId });
+    
+    const filtro = { _id: req.session.usuarioId};
+
+    const usuario = await Cliente.consultarById(filtro);
     const listaDeProdutos = await Produto.listaProdutos(); 
     const listarCarrinho = await Carrinho.listaCarrinho(usuario._id); 
     let quantidade = 0
@@ -167,6 +170,8 @@ app.post('/login', async (req, res) => {
         if (dadosExiste) {
             req.session.logado = true;
             req.session.usuarioId = dadosExiste._id;
+
+            console.log(req.session.usuarioId)
             res.redirect('/index');
         } else {
             res.status(401).json({
