@@ -33,8 +33,6 @@ Detalhes sobre as principais tabelas e suas relações:
 ![alt text](documentation/image-8.png)
 
 ## 🤝 Colaboradores
-Este projeto foi desenvolvido
-## 🤝 Colaboradores
 
 Este projeto foi desenvolvido por:
 
