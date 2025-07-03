@@ -11,11 +11,6 @@ O **TremBom** é uma plataforma de serviços de entrega desenvolvida para criar 
 * **Processamento de Pedidos:** Fluxo otimizado desde a criação até a entrega.
 * **Integração de Pagamentos:** Sistema de pagamento seguro e eficiente.
 
-## 🏗️ Arquitetura do Sistema
-
-A estrutura fundamental do TremBom é representada pelo seguinte Diagrama de Classes:
-
-![alt text](image.png)
 
 ### Descrição das Entidades e Relacionamentos
 
@@ -28,15 +23,17 @@ Detalhes sobre as principais tabelas e suas relações:
 ### Páginas do site
 
 #### Login
-![alt text](image-6.png)
+![alt text](documentation/image-6.png)
 
-![alt text](image-7.png)
+![alt text](documentation/image-7.png)
 
 #### Index
-![alt text](image-5.png)
+![alt text](documentation/image-5.png)
 
-![alt text](image-8.png)
+![alt text](documentation/image-8.png)
 
+## 🤝 Colaboradores
+Este projeto foi desenvolvido
 ## 🤝 Colaboradores
 
 Este projeto foi desenvolvido por:
