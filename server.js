@@ -84,7 +84,7 @@ app.post('/carrinho', async (req,res) => {
 
 app.get('/carrinho', async (req,res) => {
     try{
-        const { usuarioId } = req.body;
+        const { usuarioId } = req.session.usuarioId;
 
         const listarCarrinho = await Carrinho.listarCarrinho(usuarioId); 
 
@@ -130,7 +130,7 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         if (!req.body || Object.keys(req.body).length === 0) {
             return res.status(400).json({
@@ -149,7 +149,9 @@ app.post('/login', (req, res) => {
         }
 
         const filtro = { nome: nome };
-        dadosExiste = Cliente.consultar(filtro);
+        dadosExiste = await Cliente.consultar(filtro);
+
+        console.log('dados existe:', dadosExiste);
 
         if (dadosExiste) {
             req.session.logado = true;

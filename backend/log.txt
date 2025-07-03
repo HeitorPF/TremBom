@@ -1,0 +1,6 @@
+[2025-07-03T01:52:34.025Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:09:48.300Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:34:47.739Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:41:37.397Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:47:40.084Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:52:46.756Z] Cliente não encontrado: {"nome":"admin"}

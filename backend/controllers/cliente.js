@@ -105,8 +105,6 @@ class ClienteController {
 
         console.log("Cliente consultado:", cliente.nome);
 
-        client.close();
-
         return cliente;
 
       }
