@@ -1,4 +1,4 @@
-const { connect } = require("../db");
+const { connect } = require("../database/db");
 
 class Pedido {
   constructor(quantidade_itens, pedido_total, cliente_id, restaurante_id, _id = null) {
@@ -16,7 +16,7 @@ class Pedido {
 
       const result = await db.collection("pedido").insertOne({
         quantidade_itens: this.quantidade_itens,
-        pedido_total: this.pedido_total,
+        pedido_total: this.pedidos_total,
         cliente_id: this.cliente_id,
         restaurante_id: this.restaurante_id
       });

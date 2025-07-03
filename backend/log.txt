@@ -1,0 +1,10 @@
+[2025-07-03T01:52:34.025Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:09:48.300Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:34:47.739Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:41:37.397Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:47:40.084Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T02:52:46.756Z] Cliente não encontrado: {"nome":"admin"}
+[2025-07-03T08:24:16.176Z] Cliente não encontrado: {"nome":"jj"}
+[2025-07-03T08:24:52.477Z] Cliente não encontrado: {"nome":"hei"}
+[2025-07-03T08:28:06.897Z] Cliente não encontrado: {"nome":"Heitor","senha":"44"}
+[2025-07-03T08:28:32.444Z] Cliente não encontrado: {"nome":"Heitor","senha":"123"}

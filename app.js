@@ -1,11 +1,12 @@
 const http = require('http');
-const Cliente = require("./controllers/cliente");
-const Restaurante = require("./controllers/restaurante");
-const Pedido = require('./controllers/pedido')
-const Pagamento = require('./controllers/pagamento');
+const Cliente = require("./backend/controllers/cliente");
+const Restaurante = require("./backend/controllers/restaurante");
+const Pedido = require('./backend/controllers/pedido')
+const Pagamento = require('./backend/controllers/pagamento');
 const { ObjectId } = require('mongodb');
 
-const email = 'brena@gmail.com'
+const email = 'hei@gmail.com'
+const restaurante_nome = 'Piriri';
 
 const server = http.createServer(async (req, res) => {
 
@@ -15,52 +16,19 @@ const server = http.createServer(async (req, res) => {
     // --------------------- CLIENTE ----------------------
     if (req.method === 'POST' && req.url === '/inserir-cliente') { // INSERIR CLIENTE
 
-      const cliente = new Cliente("Heitor", "heitor@gmail", "123456");
+      const cliente = new Cliente("Heitor", "heitor@gmail.com", "123456");
 
-      const clienteExistente = await Cliente.consultar({ email: cliente.email });
+      await cliente.inserir();
 
-      if (clienteExistente) {
-
-        res.end(`Cliente já existe! ID: ${clienteExistente._id}`);
-
-        console.log("Cliente já existe! ID:", clienteExistente._id)
-
-        return;
-
-      }
-      else {
-
-        await cliente.inserir();
-
-      }
-
-      res.end('Cliente inserido com sucesso!');
+      res.end('Inserção de cliente realizada!!');
 
     } else if (req.method === 'DELETE' && req.url === '/deletar-cliente') { // DELETAR CLIENTE
 
       const filtro = { email: email };
 
-      const cliente = await Cliente.consultar(filtro);
+      await Cliente.excluir(filtro)
 
-      console.log(cliente)
-
-      if (!cliente) {
-
-        console.log("cliente não encontrado")
-
-        res.end("Cliente não existe");
-
-        return;
-
-      }
-
-      else {
-
-        await Cliente.excluir(cliente._id)
-
-      }
-
-      res.end('Cliente excluído com sucesso!');
+      res.end('Exclusão de cliente realizada!!');
 
     } else if (req.method === 'PUT' && req.url === '/atualizar-cliente') { // ATUALIZAR CLIENTE
 
@@ -70,28 +38,15 @@ const server = http.createServer(async (req, res) => {
 
       await Cliente.atualizar(filtro, novosDados);
 
-      res.end('Cliente atualizado com sucesso!');
-
+      res.end('Atualização de cliente realizada!');
 
     } else if (req.method === 'GET' && req.url === '/consultar-cliente') { // CONSULTAR CLIENTE !!
 
       const filtro = { email: email };
 
-      const cliente = await Cliente.consultar(filtro);
+      await Cliente.consultar(filtro);
 
-      if (!cliente) {
-
-        console.log("Cliente não existe");
-
-        res.end("Cliente não existe");
-
-        return;
-      }
-
-      console.log(`Cliente encontrado! ID: `, cliente);
-
-      res.end('Cliente consultado!');
-
+      res.end('Consulta de cliente realizada!');
 
       // --------------------- RESTAURANTE ----------------------
     } else if (req.method === 'POST' && req.url === '/inserir-restaurante') { // INSERIR RESTUARANTE
@@ -100,54 +55,33 @@ const server = http.createServer(async (req, res) => {
 
       await restaurante.inserir();
 
-      res.end('Restaurante inserido com sucesso!');
+      res.end('Inserção de restaurante realizada!');
 
     } else if (req.method === 'DELETE' && req.url === '/deletar-restaurante') { // DELETAR RESTAURANTE
 
-      const filtro = { restaurante_nome: "Piriri" };
+      const filtro = { restaurante_nome: restaurante_nome };
 
-      const restaurante = await Restaurante.consultar(filtro);
+      await Restaurante.excluir(filtro);
 
-      if (!restaurante) {
-
-        console.log("Restaurante não foi encontrado.");
-
-        res.end("Restaurante não existe");
-
-        return;
-
-      }
-
-      await Restaurante.excluir(restaurante.restaurante_nome)
-
-      res.end('Restaurante excluído com sucesso!');
+      res.end('Exclusão do restaurante realizada!');
 
     } else if (req.method === 'PUT' && req.url === '/atualizar-restaurante') { // ATUALIZAR RESTAURANTE
 
-      const filtro = { restaurante_nome: "Piriri" };
+      const filtro = { restaurante_nome: restaurante_nome };
 
       const novosDados = { horario_abertura: "10:00", horario_fechamento: "14:00" };
 
       await Restaurante.atualizar(filtro, novosDados);
 
-      res.end('Restaurante atualizado com sucesso!');
+      res.end('Atualização de restaurante realizada!');
 
     } else if (req.method === 'GET' && req.url === '/consultar-restaurante') { // CONSULTAR RESTAURANTE !!
 
       const filtro = { restaurante_nome: "Piriri" };
 
-      const rest = await Restaurante.consultar(filtro);
+      await Restaurante.consultar(filtro);
 
-      if (!rest) {
-
-        console.log("Restaurante não existe");
-
-        res.end("Restaurante não existe");
-
-        return;
-      }
-      console.log(rest)
-      res.end('Restaurante encontrado com sucesso!');
+      res.end('Consulta de restaurante realizada!');
 
       // --------------------- PEDIDO ----------------------
     } else if (req.method === 'POST' && req.url === '/inserir-pedido') {// ->> CRIAR PEDIDO
@@ -203,7 +137,7 @@ const server = http.createServer(async (req, res) => {
 
         if (!pedido) {
 
-          console.log("Pedido não encontrado");
+          console.error("Pedido não encontrado", error);
 
           res.end("Pedido não encontrado");
 
@@ -218,19 +152,19 @@ const server = http.createServer(async (req, res) => {
       res.end(`Pedido encontrado!`);
       // --------------------------------- PAGAMENTO ----------------------------------
     } else if (req.method === 'POST' && req.url === '/inserir-pagamento') { // INSERIR PAGAMENTO
-      
-      const filtroCliente = {email: email}
+
+      const filtroCliente = { email: email }
       const cliente = await Cliente.consultar(filtroCliente)
 
-      if(!cliente) {
+      if (!cliente) {
         console.log("Cliente não existe");
 
         res.end("CLiente não encontrado");
 
         return;
       }
-      const pedido = await Pedido.consultar({cliente_id: cliente._id})
-      if(!pedido) {
+      const pedido = await Pedido.consultar({ cliente_id: cliente._id })
+      if (!pedido) {
         console.log("Pedido não existe");
 
         res.end("Pedido não encontrado");
