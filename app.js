@@ -1,240 +1,239 @@
+const express = require('express');
+const path = require('path');
 const http = require('http');
-const Cliente = require("./backend/controllers/cliente");
-const Restaurante = require("./backend/controllers/restaurante");
-const Pedido = require('./backend/controllers/pedido')
-const Pagamento = require('./backend/controllers/pagamento');
-const { ObjectId } = require('mongodb');
-
-const email = 'hei@gmail.com'
-const restaurante_nome = 'Piriri';
-
-const server = http.createServer(async (req, res) => {
-
-  console.log(`Requisição recebida: ${req.method} ${req.url}`);
-
-  try {
-    // --------------------- CLIENTE ----------------------
-    if (req.method === 'POST' && req.url === '/inserir-cliente') { // INSERIR CLIENTE
-
-      const cliente = new Cliente("Heitor", "heitor@gmail.com", "123456");
-
-      await cliente.inserir();
-
-      res.end('Inserção de cliente realizada!!');
-
-    } else if (req.method === 'DELETE' && req.url === '/deletar-cliente') { // DELETAR CLIENTE
-
-      const filtro = { email: email };
-
-      await Cliente.excluir(filtro)
-
-      res.end('Exclusão de cliente realizada!!');
-
-    } else if (req.method === 'PUT' && req.url === '/atualizar-cliente') { // ATUALIZAR CLIENTE
-
-      const filtro = { email: email };
-
-      const novosDados = { nome: "Brenda" };
-
-      await Cliente.atualizar(filtro, novosDados);
-
-      res.end('Atualização de cliente realizada!');
-
-    } else if (req.method === 'GET' && req.url === '/consultar-cliente') { // CONSULTAR CLIENTE !!
-
-      const filtro = { email: email };
-
-      await Cliente.consultar(filtro);
-
-      res.end('Consulta de cliente realizada!');
-
-      // --------------------- RESTAURANTE ----------------------
-    } else if (req.method === 'POST' && req.url === '/inserir-restaurante') { // INSERIR RESTUARANTE
-
-      const restaurante = new Restaurante("Piriri", "09:00", "12:00");
-
-      await restaurante.inserir();
-
-      res.end('Inserção de restaurante realizada!');
-
-    } else if (req.method === 'DELETE' && req.url === '/deletar-restaurante') { // DELETAR RESTAURANTE
-
-      const filtro = { restaurante_nome: restaurante_nome };
-
-      await Restaurante.excluir(filtro);
-
-      res.end('Exclusão do restaurante realizada!');
-
-    } else if (req.method === 'PUT' && req.url === '/atualizar-restaurante') { // ATUALIZAR RESTAURANTE
-
-      const filtro = { restaurante_nome: restaurante_nome };
-
-      const novosDados = { horario_abertura: "10:00", horario_fechamento: "14:00" };
-
-      await Restaurante.atualizar(filtro, novosDados);
-
-      res.end('Atualização de restaurante realizada!');
-
-    } else if (req.method === 'GET' && req.url === '/consultar-restaurante') { // CONSULTAR RESTAURANTE !!
-
-      const filtro = { restaurante_nome: "Piriri" };
-
-      await Restaurante.consultar(filtro);
-
-      res.end('Consulta de restaurante realizada!');
-
-      // --------------------- PEDIDO ----------------------
-    } else if (req.method === 'POST' && req.url === '/inserir-pedido') {// ->> CRIAR PEDIDO
-
-      const filtroCliente = { email: email };
-
-      const cliente = await Cliente.consultar(filtroCliente);
-
-      const filtroRest = { restaurante_nome: "Piriri" }
-
-      const restaurante = await Restaurante.consultar(filtroRest)
-
-      const pedido = new Pedido(4, 60, cliente._id, restaurante._id)
-
-      await pedido.inserir()
-
-      res.end(`Pedido feito!`)
-
-    } else if (req.method === 'DELETE' && req.url === '/deletar-pedido') { // ->> EXCLUIR PEDIDO
-
-      const filtroCliente = { email: email };
-
-      const cliente = await Cliente.consultar(filtroCliente);
-
-      console.log(cliente)
-
-      await Pedido.excluir(cliente._id)
-
-      console.log('Pedidos excluidos');
-
-      res.end(`Cliente encontrado! ID: ${cliente._id}`)
-
-    } else if (req.method === 'GET' && req.url === '/consultar-pedido') { // ->> CONSULTAR PEDIDO
-
-      const filtroCliente = { email: email };
-
-      const cliente = await Cliente.consultar(filtroCliente);
-
-      if (!cliente) {
-
-        console.log("Cliente não existe");
-
-        res.end("CLiente não encontrado");
-
-        return;
-      }
-
-      else {
-
-        const filtroPedido = { cliente_id: cliente._id }
-
-        const pedido = await Pedido.consultar(filtroPedido);
-
-        if (!pedido) {
-
-          console.error("Pedido não encontrado", error);
-
-          res.end("Pedido não encontrado");
-
-          return;
-        }
-
-        console.log(pedido)
-
-      }
-
-
-      res.end(`Pedido encontrado!`);
-      // --------------------------------- PAGAMENTO ----------------------------------
-    } else if (req.method === 'POST' && req.url === '/inserir-pagamento') { // INSERIR PAGAMENTO
-
-      const filtroCliente = { email: email }
-      const cliente = await Cliente.consultar(filtroCliente)
-
-      if (!cliente) {
-        console.log("Cliente não existe");
-
-        res.end("CLiente não encontrado");
-
-        return;
-      }
-      const pedido = await Pedido.consultar({ cliente_id: cliente._id })
-      if (!pedido) {
-        console.log("Pedido não existe");
-
-        res.end("Pedido não encontrado");
-
-        return;
-      }
-      console.log(pedido)
-      const pagamento = new Pagamento(false, 22.12, "07/06/2025", "cartão", pedido._id);
-
-      await pagamento.inserir()
-
-      res.end('Pagamento inserido com sucesso!');
-
-    } else if (req.method === 'DELETE' && req.url === '/deletar-pagamento') { // DELETAR PAGAMENTO
-
-      const pagamento_id = new ObjectId('6841e6d56908ce2e1d292018')
-      await Pagamento.excluir(pagamento_id)
-
-      res.end('Pagamento excluído com sucesso!');
-
-    } else if (req.method === 'PUT' && req.url === '/atualizar-pagamento') { // ATUALIZAR PAGAMENTO
-
-      const pagamento_id = new ObjectId('6841e9e6f8a761a3a7c490e7')
-
-      const filtro = { _id: pagamento_id };
-
-      const novosDados = { pago: true };
-
-      await Pagamento.atualizar(filtro, novosDados);
-
-      res.end('pagamento atualizado com sucesso!');
-
-    } else if (req.method === 'GET' && req.url === '/consultar-pagamento') { // CONSULTAR PAGAMENTO
-
-      const pagamento_id = new ObjectId('6841e9e6f8a761a3a7c490e7')
-      const filtro = { _id: pagamento_id };
-
-      const pagamento = await Pagamento.consultar(filtro);
-
-      console.log(`Pagamento encontrado! ID: `, pagamento);
-
-      res.end('Pagamento consultado!');
-    }
-    else {
-
-      res.end('Rota não encontrada');
-
-    }
-  }
-  catch (error) {
-
-    console.error('Erro ao processar a requisição:', error);
-
-    res.writeHead(500, { 'Content-Type': 'text/plain' });
-
-    res.end('Erro interno do servidor');
-
-  }
-
-}
-
-
+const app = express();
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const Produto = require('./backend/controllers/produto');
+const Carrinho = require('./backend/controllers/carrinho');
+const Cliente = require('./backend/controllers/cliente')
+
+app.set('views', path.join(__dirname, 'frontend', 'views'));
+app.use(express.static(path.join(__dirname, 'frontend', 'public')));
+
+app.set('view engine', 'hbs');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+const mongooseConnect = require('./backend/database/db');
+
+mongooseConnect().then(() => {
+  app.listen(3000, () => {
+    console.log('Servidor rodando na porta 3000');
+  });
+});
+
+
+app.use(
+    session({
+        secret: 'segredo_super_secreto',
+        resave: false,
+        saveUninitialized: false,
+        cookie: { maxAge: 6000000 }
+    })
 );
 
+function checkLogin(req, res, next) {
+    try {
+        if (req.session && req.session.logado) {
+            next();
+        } else {
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Erro na verificação de login:', error);
+        res.redirect('/login');
+    }
+}
+app.get('/index', checkLogin, async (req, res) => {
+  try {
+    
+    const filtro = { _id: req.session.usuarioId};
+
+    console.log("cliente id para criar o carrinho",filtro);
+
+    const usuario = await Cliente.consultarById(filtro);
+
+    if(!req.session.carrinho) {
+        Carrinho.adicionarAoCarrinho(usuario._id, undefined, req.session.carrinho)
+    }
+    
+    const listaDeProdutos = await Produto.listaProdutos(); 
+    const listarCarrinho = await Carrinho.listaCarrinho(usuario._id);
+    
+    console.log(listarCarrinho);
+
+    let quantidade = 0
+    listarCarrinho.itens.forEach((item) => {
+    
+        quantidade += item.quantidade
+    })
+
+    res.render('pedido', {
+        produto: listaDeProdutos,
+        usuario: usuario.nome,
+        carrinho: listarCarrinho,
+        quantidade: quantidade,
+    }); 
+    console.log(listaDeProdutos)
+
+  } catch (error) {
+    console.error('Erro ao carregar página de pedido:', error);
+    res.status(500).send('Erro interno do servidor');
+  }
+});
+
+app.post('/carrinho', async (req,res) => {
+    try{
+        const { _id } = req.body;
+        const usuarioId = req.session.usuarioId;
+        const carrinhoSessao = req.session.carrinho;
+        console.log(_id)
+        
+        const { carrinhoAtualizado, produto } = await Carrinho.adicionarAoCarrinho(usuarioId,_id,carrinhoSessao);
 
 
-const PORT = 8000;
+        req.session.carrinho = carrinhoAtualizado;
 
-server.listen(PORT, () => {
+        res.status(200).json({
+        mensagem: `${produto.nome} adicionado ao carrinho com sucesso!`,
+        carrinho: carrinhoAtualizado
+        });
 
-  console.log(`Servidor rodando na porta ${PORT}`);
+    }catch (error){
+        console.error('Erro ao carregar página de pedido:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+})
 
+
+app.get('/carrinho', async (req,res) => {
+    try{
+        const { usuarioId } = req.session.usuarioId;
+
+        console.log("carrido do cliente id ",req.session.usuarioId);
+
+        const listarCarrinho = await Carrinho.listaCarrinho(usuarioId); 
+
+
+        res.render('pedido', { carrinho: listarCarrinho }); 
+
+
+    }catch (error){
+        console.error('Erro ao carregar página de pedido:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+})
+
+
+app.get('/login', (req, res) => {
+    try {
+        res.render('login');
+    } catch (error) {
+        console.error('Erro ao carregar página de login:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+app.get('/logout', (req, res) => {
+    try {
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Erro ao destruir sessão:', err);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Erro ao fazer logout'
+                });
+            }
+            res.redirect('/login');
+        });
+    } catch (error) {
+        console.error('Erro no logout:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erro interno do servidor'
+        });
+    }
+});
+
+app.post('/register', async (req, res) => {
+    try {
+        const { nome, email, senha } = req.body;
+        const cliente = new Cliente(nome, email, senha); 
+        const result = await cliente.inserir(); 
+
+        if (result) {
+            return res.status(200).json({ message: 'Cadastro realizado com sucesso!', userId: result.insertedId });
+        } else {
+           
+            return res.status(409).json({ message: 'Este e-mail já está cadastrado.' });
+        }
+    } catch (error) {
+   
+        console.error('Erro ao processar cadastro:', error);
+        return res.status(500).json({ message: 'Erro interno do servidor ao cadastrar.', error: error.message });
+    }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        if (!req.body || Object.keys(req.body).length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'Dados do formulário não recebidos. Verifique se o formulário está sendo enviado corretamente.'
+            });
+        }
+
+        const { nome, senha } = req.body;
+
+        if (!nome || !senha) {
+            return res.status(400).json({
+                success: false,
+                message: 'Usuário e senha são obrigatórios.'
+            });
+        }
+
+        const filtro = { nome: nome , senha: senha};
+        dadosExiste = await Cliente.consultar(filtro);
+
+        console.log('dados existe:', dadosExiste);
+
+        if (dadosExiste) {
+            req.session.logado = true;
+            req.session.usuarioId = dadosExiste._id;
+
+            console.log(req.session.usuarioId)
+            res.redirect('/index');
+        } else {
+            res.status(401).json({
+                success: false,
+                message: 'Credenciais inválidas. Usuário ou senha incorretos.'
+            });
+        }
+    } catch (error) {
+        console.error('Erro no login:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erro interno do servidor. Tente novamente mais tarde.'
+        });
+    }
+});
+
+app.get('/', (req, res) => {
+    try {
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Erro ao redirecionar para login:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+app.use((req, res) => {
+    res.status(404).send('Página não encontrada');
+});
+
+
+
+http.createServer(app).listen(3000, () => {
+    console.log('Servidor rodando na porta 3000');
 });
