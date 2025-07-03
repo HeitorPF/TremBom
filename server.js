@@ -49,10 +49,17 @@ app.get('/index', checkLogin, async (req, res) => {
   try {
     const usuario = await Cliente.consultar({ _id: req.session.usuarioId });
     const listaDeProdutos = await Produto.listaProdutos(); 
+    const listarCarrinho = await Carrinho.listaCarrinho(usuario._id); 
+    let quantidade = 0
+    listarCarrinho.itens.forEach((item) => {
+        quantidade += item.quantidade
+    })
 
     res.render('pedido', {
         produto: listaDeProdutos,
         usuario: usuario.nome,
+        carrinho: listarCarrinho,
+        quantidade: quantidade,
     }); 
     console.log(listaDeProdutos)
 

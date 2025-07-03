@@ -75,10 +75,6 @@ class ProdutoController {
       res.status(500).send('Erro interno do servidor');
     }
   }
-
-
-
-
 }
 
 module.exports = ProdutoController;

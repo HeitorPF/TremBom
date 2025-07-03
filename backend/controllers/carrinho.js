@@ -1,7 +1,8 @@
 
 const Produto = require('../models/ProdutoModel'); 
+const Carrinho = require('../models/CarrinhoModel')
 const CarrinhoModel = require('../models/CarrinhoModel'); 
-class Carrinho {
+class CarrinhoController {
 
   static async adicionarAoCarrinho(usuarioId, produtoId, carrinhoSessao) {
     const produto = await Produto.findById(produtoId);
@@ -49,10 +50,10 @@ class Carrinho {
     return { carrinhoAtualizado: carrinhoSessao, produto };
   }
 
-  static async listaCarrinho(){
+  static async listaCarrinho(usuarioId){
 
     try{
-      const listaCarrinho = await Carrinho.find();
+      const listaCarrinho = await Carrinho.findOne({clienteId: usuarioId})
       return listaCarrinho;
     }
     catch (error) {
@@ -61,4 +62,4 @@ class Carrinho {
     }
   }
 }
-module.exports = Carrinho
+module.exports = CarrinhoController
