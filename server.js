@@ -47,9 +47,13 @@ function checkLogin(req, res, next) {
 }
 app.get('/index', checkLogin, async (req, res) => {
   try {
+    const usuario = await Cliente.consultar({ _id: req.session.usuarioId });
     const listaDeProdutos = await Produto.listaProdutos(); 
 
-    res.render('pedido', { produto: listaDeProdutos }); 
+    res.render('pedido', {
+        produto: listaDeProdutos,
+        usuario: usuario.nome,
+    }); 
     console.log(listaDeProdutos)
 
   } catch (error) {
@@ -86,7 +90,7 @@ app.get('/carrinho', async (req,res) => {
     try{
         const { usuarioId } = req.session.usuarioId;
 
-        const listarCarrinho = await Carrinho.listarCarrinho(usuarioId); 
+        const listarCarrinho = await Carrinho.listaCarrinho(usuarioId); 
 
 
         res.render('pedido', { carrinho: listarCarrinho }); 

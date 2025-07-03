@@ -48,5 +48,17 @@ class Carrinho {
 
     return { carrinhoAtualizado: carrinhoSessao, produto };
   }
+
+  static async listaCarrinho(){
+
+    try{
+      const listaCarrinho = await Carrinho.find();
+      return listaCarrinho;
+    }
+    catch (error) {
+      console.error('Erro ao listar carrinho:', error);
+      res.status(500).send('Erro interno do servidor');
+    }
+  }
 }
 module.exports = Carrinho

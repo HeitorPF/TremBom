@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const produtoId = botao.getAttribute('data-id');
         const preco = botao.closest('.item').querySelector('.preco-produto strong').textContent.replace('R$', '').replace(',', '.');
 
-        console.log(produtoId,preco)
+        console.log(`id: ${produtoId} preço: ${preco}`)
         try {
           const resposta = await fetch('/carrinho', {
             method: 'POST',
