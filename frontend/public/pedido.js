@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
 
           if (resposta.ok) {
+            window.location.reload()
             console.log('Produto adicionado ao carrinho com sucesso');
           } else {
             console.error('Erro ao adicionar produto');

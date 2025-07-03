@@ -53,9 +53,14 @@ app.get('/index', checkLogin, async (req, res) => {
     console.log("cliente id para criar o carrinho",filtro);
 
     const usuario = await Cliente.consultarById(filtro);
-    const listaDeProdutos = await Produto.listaProdutos(); 
-    const listarCarrinho = await Carrinho.listaCarrinho(usuario._id); 
 
+    if(!req.session.carrinho) {
+        Carrinho.adicionarAoCarrinho(usuario._id, undefined, req.session.carrinho)
+    }
+    
+    const listaDeProdutos = await Produto.listaProdutos(); 
+    const listarCarrinho = await Carrinho.listaCarrinho(usuario._id);
+    
     console.log(listarCarrinho);
 
     let quantidade = 0
