@@ -102,3 +102,10 @@
 .popup-close:hover {
     color: #333;
 }
+
+.botao-cadastrar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
