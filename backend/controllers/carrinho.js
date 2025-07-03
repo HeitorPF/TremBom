@@ -6,9 +6,9 @@ class CarrinhoController {
 
   static async adicionarAoCarrinho(usuarioId, produtoId, carrinhoSessao) {
     const produto = await Produto.findById(produtoId);
-    if (!produto) {
-      throw new Error('Produto não encontrado.');
-    }
+    // if (!produto) {
+    //   throw new Error('Produto não encontrado.');
+    // }
 
     // Inicializa carrinho se necessário
     if (!carrinhoSessao) {
@@ -24,16 +24,19 @@ class CarrinhoController {
       item.produtoId.toString() === produto._id.toString()
     );
 
-    if (itemExistente) {
-      itemExistente.quantidade += 1;
-      itemExistente.preco += produto.preco;
-    } else {
-      carrinhoSessao.itens.push({
-        produtoId: produto._id,
-        quantidade: 1,
-        preco: produto.preco
-      });
+    if(produtoId) {
+      if (itemExistente) {
+        itemExistente.quantidade += 1;
+        itemExistente.preco += produto.preco;
+      } else {
+        carrinhoSessao.itens.push({
+          produtoId: produto._id,
+          quantidade: 1,
+          preco: produto.preco
+        });
+      }
     }
+
 
     // Atualiza total
     carrinhoSessao.total = carrinhoSessao.itens.reduce(

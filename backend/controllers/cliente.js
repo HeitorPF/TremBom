@@ -16,10 +16,6 @@ class ClienteController {
       throw new Error("Nome, email e senha são obrigatórios.");
     }
 
-    if (this.senha.length < 6) {
-      logger("Erro: Senha deve ter pelo menos 6 caracteres.");
-      throw new Error("Senha deve ter pelo menos 6 caracteres.");
-    }
   }
 
 
@@ -47,7 +43,7 @@ class ClienteController {
 
         console.log("Inserindo novo cliente:", this.nome);
 
-        const result = await db.collection("cliente").insertOne({
+        const result = await Cliente.insertOne({
 
           nome: this.nome,
 
@@ -69,9 +65,10 @@ class ClienteController {
 
         }));
 
+        return result;
+
       }
 
-      client.close();
 
 
     } catch (error) {
