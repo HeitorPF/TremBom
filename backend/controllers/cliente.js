@@ -89,7 +89,9 @@ class ClienteController {
   static async consultar(filtro = {}) {
     try {
 
-      const cliente = await Cliente.findOne(filtro);
+      const cliente = await Cliente.findOne({ nome: filtro.nome });
+
+      
 
       if (!cliente) {
 
@@ -99,15 +101,64 @@ class ClienteController {
 
         return;
 
-      } else {
+      } 
 
-        console.log("---------------------------------------");
 
-        console.log("Cliente consultado:", cliente.nome);
+      if(cliente.senha == filtro.senha){
+
+          console.log("---------------------------------------");
+
+          console.log("Cliente consultado:", cliente.nome);
+
+          logger('Cliente nome e senha corretos:' + JSON.stringify(filtro));
+
+
+          return cliente;
+      }
+      else{
+
+        console.log("Senha incorreta", cliente.nome);
+
+        logger('Cliente nome ou senha incorretos:' + JSON.stringify(filtro));
+
+        return ;
+      }
+
+      
+
+    } catch (error) {
+
+      console.error("Erro ao buscar cliente: " + error);
+
+      throw error;
+    }
+
+  }
+
+   static async consultarById(filtro = {}) {
+    try {
+
+      const cliente = await Cliente.findOne({ _id: filtro._id });
+
+      console.log(cliente);  
+
+      if (!cliente) {
+
+        console.log("Cliente não encontrado");
+
+        logger("Cliente não encontrado: " + JSON.stringify(filtro));
+
+        return;
+
+      } else{
+
+        console.log("Cliente encontrado", cliente.nome);
+
+        logger('Cliente encontrado:' + JSON.stringify(filtro));
 
         return cliente;
-
       }
+
 
     } catch (error) {
 
